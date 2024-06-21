@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/drand-react-widget/static/css/main.e6c13ad2.css",
+    "main.js": "/drand-react-widget/static/js/main.09e8d4cb.js",
+    "static/js/453.c8bf36e8.chunk.js": "/drand-react-widget/static/js/453.c8bf36e8.chunk.js",
+    "index.html": "/drand-react-widget/index.html",
+    "main.e6c13ad2.css.map": "/drand-react-widget/static/css/main.e6c13ad2.css.map",
+    "main.09e8d4cb.js.map": "/drand-react-widget/static/js/main.09e8d4cb.js.map",
+    "453.c8bf36e8.chunk.js.map": "/drand-react-widget/static/js/453.c8bf36e8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.09e8d4cb.js"
+  ]
+}
