@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { 
   // fetchBeacon, 
   // fetchBeaconByTime, 
@@ -17,7 +17,7 @@ function App() {
   const [eta, setETA] = useState(null)
   const [round, setRound] = useState(null)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const fetchLatestRandomness = async () => {
       
       try {
@@ -31,7 +31,6 @@ function App() {
         }
 
         
-
         // fetching randomness from multiple APIs and automatically use the fastest
         const urls = [
           'https://api.drand.sh',
@@ -46,12 +45,15 @@ function App() {
 
         // const info = await client.info()
 
+        // todo: we could automate fetching of eta
         // const nextRoundETA = () => {
         //   const now = Date.now()
         //   const round = // current beacon round
         //   const time = info.genesis_time * 1000 + round * info.period * 1000
         //   return Math.round((time - now) / 1000)
         // }
+
+        // client.stop()
 
         const abortController = new AbortController()
         for await (const beacon of watch(client, abortController)) {
