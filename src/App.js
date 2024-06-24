@@ -9,6 +9,8 @@ import {
   // MultiBeaconNode 
 } from 'drand-client'
 
+import "./App.css"
+
 // BigInt isues and solutions: https://github.com/eslint/eslint/issues/11524
 /* global BigInt */
 
@@ -33,11 +35,12 @@ function App() {
         
         // fetching randomness from multiple APIs and automatically use the fastest
         const urls = [
-          'https://api.drand.sh',
-          'https://api2.drand.sh',
-          'https://api3.drand.sh',
-          'https://drand.cloudflare.com'
+          "https://api.drand.sh",
+          "https://api2.drand.sh",
+          "https://api3.drand.sh",
+          "https://drand.cloudflare.com"
         ]
+        
         const client = new FastestNodeClient(urls, options)
 
         // start the client, so that it periodically optimises for the fastest node!
@@ -76,24 +79,17 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Latest Randomness from dRAND Beacon</h1>
-        
-        Next Randomness ETA: {eta ? (
-          <p>{eta}</p>
-        ) : (
-          <p>Loading...</p>
-        )}
-
-        Latest Round: {round ? (
-          <p>{round}</p>
-        ) : (
-          <p>Loading...</p>
-        )}
-
-        Latest Randomness: {latestRandomness ? (
-          <p>{latestRandomness}</p>
-        ) : (
-          <p>Loading...</p>
-        )}
+        <div className="info">
+          <div className="info-item">
+            <strong>Next Randomness ETA:</strong> <span>{eta ? eta : 'Loading...'}</span>
+          </div>
+          <div className="info-item">
+            <strong>Latest Round:</strong> <span>{round ? round : 'Loading...'}</span>
+          </div>
+          <div className="info-item">
+            <strong>Latest Randomness:</strong> <span>{latestRandomness ? latestRandomness : 'Loading...'}</span>
+          </div>
+        </div>
       </header>
     </div>
   );
