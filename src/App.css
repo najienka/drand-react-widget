@@ -1,54 +1,38 @@
-/* App.css */
-
-body {
-  margin: 0;
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  background-color: #001f3f; /* Navy blue background */
-  color: #ffffff; /* White text */
-}
-
 .App {
   text-align: center;
-  padding: 20px;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
 
 .App-header {
-  background-color: #003366; /* Slightly lighter navy blue for the header */
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  color: #ffffff; /* Ensure all text in the header is white */
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
 
-h1 {
-  font-size: 2rem;
-  color: #ffffff; /* White text for the heading */
+.App-link {
+  color: #61dafb;
 }
 
-.info {
-  font-size: 1.5rem; /* Increase font size for the info section */
-  margin: 20px 0;
-}
-
-.info-item {
-  margin: 10px 0; /* Space between items */
-  font-size: 1.2rem; /* Slightly larger text for info items */
-}
-
-@media (max-width: 600px) {
-  .App-header {
-    padding: 10px;
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
   }
-
-  h1 {
-    font-size: 1.5rem;
-  }
-
-  .info {
-    font-size: 1.2rem;
-  }
-
-  .info-item {
-    font-size: 1rem;
+  to {
+    transform: rotate(360deg);
   }
 }
