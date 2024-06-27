@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import {
-  watch,
-  FastestNodeClient
-} from 'drand-client';
+import React, { useState, useEffect, useRef } from 'react';
+import { watch, FastestNodeClient } from 'drand-client';
 
-// BigInt isues and solutions: https://github.com/eslint/eslint/issues/11524
+// BigInt issues and solutions: https://github.com/eslint/eslint/issues/11524
 /* global BigInt */
 
 function App() {
@@ -12,6 +9,8 @@ function App() {
   const [eta, setETA] = useState(null);
   const [round, setRound] = useState(null);
   const [network, setNetwork] = useState('default'); // default to 'default' network
+  const clientRef = useRef(null);
+  const abortControllerRef = useRef(null);
 
   useEffect(() => {
     const fetchLatestRandomness = async () => {
@@ -47,12 +46,23 @@ function App() {
           urls = urls.map(url => `${url}/${chainHash}`);
         }
 
-        const headers = {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Credentials': 'true'};
-        const client = new FastestNodeClient(urls, options, {headers});
+        const headers = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Credentials': 'true' };
+        const client = new FastestNodeClient(urls, options, { headers });
 
+        // Stop the previous client if it exists
+        if (clientRef.current) {
+          clientRef.current.stop();
+        }
+        if (abortControllerRef.current) {
+          abortControllerRef.current.abort();
+        }
+
+        clientRef.current = client;
         client.start();
 
         const abortController = new AbortController();
+        abortControllerRef.current = abortController;
+
         for await (const beacon of watch(client, abortController)) {
           const currentTime = new Date().getTime();
           const nextETA = new Date(currentTime + updateInterval);
@@ -66,6 +76,16 @@ function App() {
     };
 
     fetchLatestRandomness();
+
+    return () => {
+      // Clean up the client and abort controller when the component unmounts or network changes
+      if (clientRef.current) {
+        clientRef.current.stop();
+      }
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
   }, [network]);
 
   const handleNetworkChange = (event) => {
@@ -85,7 +105,7 @@ function App() {
           </select>
         </div>
 
-        <br></br>
+        <br />
 
         Next Randomness ETA: {eta ? (
           <p>{eta}</p>
