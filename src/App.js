@@ -35,10 +35,10 @@ function App() {
         };
 
         let urls = [
-          'http://api.drand.sh',
-          'http://api2.drand.sh',
-          'http://api3.drand.sh',
-          'http://drand.cloudflare.com'
+          'https://api.drand.sh',
+          'https://api2.drand.sh',
+          'https://api3.drand.sh',
+          'https://drand.cloudflare.com'
         ];
 
         // Append chainHash to each URL if quicknet is selected
