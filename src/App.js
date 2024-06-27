@@ -98,7 +98,7 @@ function App() {
         <h1>Latest Randomness from drand Beacon</h1>
 
         <div>
-          Select Beacon Chain:
+          Select Beacon Network:
           <select value={network} onChange={handleNetworkChange} style={{ marginLeft: '10px' }}>
             <option value="default">Default</option>
             <option value="quicknet">Quicknet</option>
